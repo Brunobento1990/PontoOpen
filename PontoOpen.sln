@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34928.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PontoOpen.Domain", "PontoOpen.Domain\PontoOpen.Domain.csproj", "{1B5540C6-A8F5-4964-A2D1-7C5592AC1E32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PontoOpen.Infrastructure", "PontoOpen.Infrastructure\PontoOpen.Infrastructure.csproj", "{03DCF5B7-63E1-4544-BE91-CD3829118281}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PontoOpen.Application", "PontoOpen.Application\PontoOpen.Application.csproj", "{3BB14778-B6AD-47CA-A94F-537A1ECE37CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PontoOpen.IoC", "PontoOpen.IoC\PontoOpen.IoC.csproj", "{26B09418-759A-4B77-BCDF-C75CAA8CC736}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PontoOpen.Api", "PontoOpen.Api\PontoOpen.Api.csproj", "{96B98C53-8142-4FFB-A30C-2962170396BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B5540C6-A8F5-4964-A2D1-7C5592AC1E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B5540C6-A8F5-4964-A2D1-7C5592AC1E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B5540C6-A8F5-4964-A2D1-7C5592AC1E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B5540C6-A8F5-4964-A2D1-7C5592AC1E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03DCF5B7-63E1-4544-BE91-CD3829118281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03DCF5B7-63E1-4544-BE91-CD3829118281}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03DCF5B7-63E1-4544-BE91-CD3829118281}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03DCF5B7-63E1-4544-BE91-CD3829118281}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB14778-B6AD-47CA-A94F-537A1ECE37CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB14778-B6AD-47CA-A94F-537A1ECE37CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB14778-B6AD-47CA-A94F-537A1ECE37CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB14778-B6AD-47CA-A94F-537A1ECE37CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26B09418-759A-4B77-BCDF-C75CAA8CC736}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26B09418-759A-4B77-BCDF-C75CAA8CC736}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26B09418-759A-4B77-BCDF-C75CAA8CC736}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26B09418-759A-4B77-BCDF-C75CAA8CC736}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96B98C53-8142-4FFB-A30C-2962170396BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B98C53-8142-4FFB-A30C-2962170396BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96B98C53-8142-4FFB-A30C-2962170396BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96B98C53-8142-4FFB-A30C-2962170396BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {32C89023-954B-4342-AA3B-82FD60706C02}
+	EndGlobalSection
+EndGlobal
