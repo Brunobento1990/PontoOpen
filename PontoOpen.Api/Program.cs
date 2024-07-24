@@ -30,6 +30,8 @@ app.AddMiddlewaresApi();
 
 app.UseAuthorization();
 
+app.UseCors("base");
+
 app.MapControllers();
 
 app.Run();
