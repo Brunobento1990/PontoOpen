@@ -23,7 +23,7 @@ jobs:
     - name: Test
       run: dotnet test ./PontoOpen.Test
     - name: Build-Image-Docker
-      run: docker build -f PontoOpen/Dockerfile --no-cache -t brunobentocaina/ponto-open-api:stating .
+      run: docker build -f PontoOpen.Api/Dockerfile --no-cache -t brunobentocaina/ponto-open-api:stating .
     - name: Push
       run: |
         docker login -u brunobentocaina -p ${{ secrets.DOCKER_HUB_KEY }}
