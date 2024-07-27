@@ -12,7 +12,7 @@ public sealed class LoginService : ILoginService
     private readonly ILoginRepository _loginRepository;
 
     public LoginService(
-        IEmpresaRepository empresaRepository, 
+        IEmpresaRepository empresaRepository,
         ILoginRepository loginRepository)
     {
         _empresaRepository = empresaRepository;
@@ -21,9 +21,14 @@ public sealed class LoginService : ILoginService
 
     public async Task<OneOf<UsuarioViewModel, ErrorResponse>> LoginAsync(UsuarioLoginDto usuarioLoginDto)
     {
+        if (!usuarioLoginDto.Validar())
+        {
+            return new ErrorResponse("Os dados enviados para o login são inválidos!");
+        }
+
         var usuario = await _loginRepository.LoginAsync(usuarioLoginDto.ChaveDeAcessoUsuario);
 
-        if (usuario == null) 
+        if (usuario == null)
         {
             return new ErrorResponse("O usuário não foi localizado!");
         }
@@ -40,7 +45,7 @@ public sealed class LoginService : ILoginService
 
         var empresa = await _empresaRepository.GetByChaveDeAcessoAsync(usuarioLoginDto.ChaveDeAcessoEmpresa);
 
-        if (empresa == null) 
+        if (empresa == null)
         {
             return new ErrorResponse("A empresa não foi localizada!");
         }
