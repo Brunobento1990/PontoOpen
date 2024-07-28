@@ -22,8 +22,8 @@ public class LogMidlleware
     {
         try
         {
-            _empresaId = (string?)httpContext.Request.Headers.FirstOrDefault(x => x.Key == "ChaveDeAcessoEmpresa").Value ?? "EmpresaId não lozalizada!";
-            _usuarioId = (string?)httpContext.Request.Headers.FirstOrDefault(x => x.Key == "ChaveDeAcessoUsuario").Value ?? "Usuario não lozalizada!";
+            _empresaId = (string?)httpContext.Request.Headers.FirstOrDefault(x => x.Key == "chavedeacessoempresa").Value ?? "EmpresaId não lozalizada!";
+            _usuarioId = (string?)httpContext.Request.Headers.FirstOrDefault(x => x.Key == "chavedeacessousuario").Value ?? "Usuario não lozalizada!";
             _message = $"Path: {httpContext.Request.Path} => EmpresaId: {_empresaId} => UsuarioId: {_usuarioId}";
             await _next(httpContext);
 
