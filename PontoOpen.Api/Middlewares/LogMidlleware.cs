@@ -1,5 +1,6 @@
 ﻿using PontoOpen.Api.Config;
 using PontoOpen.Application.ViewModels;
+using PontoOpen.Domain.Exceptions;
 using PontoOpen.Infrastructure.HttpService.Interfaces;
 using PontoOpen.Infrastructure.Models;
 using System.Text.Json;
@@ -9,6 +10,9 @@ namespace PontoOpen.Api.Middlewares;
 public class LogMidlleware
 {
     private readonly RequestDelegate _next;
+    private string _message;
+    private string _empresaId;
+    private string _usuarioId;
     public LogMidlleware(RequestDelegate next)
     {
         _next = next;
@@ -18,13 +22,25 @@ public class LogMidlleware
     {
         try
         {
+            _empresaId = (string?)httpContext.Request.Headers.FirstOrDefault(x => x.Key == "ChaveDeAcessoEmpresa").Value ?? "EmpresaId não lozalizada!";
+            _usuarioId = (string?)httpContext.Request.Headers.FirstOrDefault(x => x.Key == "ChaveDeAcessoUsuario").Value ?? "Usuario não lozalizada!";
+            _message = $"Path: {httpContext.Request.Path} => EmpresaId: {_empresaId} => UsuarioId: {_usuarioId}";
             await _next(httpContext);
 
-            var empresaId = (string?)httpContext.Request.Headers.FirstOrDefault(x => x.Key == "EmpresaId").Value ?? "EmpresaId não lozalizada!";
-            var usuarioId = (string?)httpContext.Request.Headers.FirstOrDefault(x => x.Key == "UsuarioId").Value ?? "Usuario não lozalizada!";
-            var mensagem = $"{httpContext.Request.Path} \\n EmpresaId: {empresaId} \\n UsuarioId: {usuarioId}";
-            var discordModel = GetDiscordModel(mensagem, 008000, titulo: "Acesso da rota!");
+            var discordModel = GetDiscordModel(_message, 008000, titulo: "Acesso da rota!");
             await NotificarDiscord(discordModel, discordHttpService);
+        }
+        catch(ApiException ex)
+        {
+            var discordModel = GetDiscordModel(_message, 008000, titulo: "Acesso da rota!");
+            await NotificarDiscord(discordModel, discordHttpService);
+            await HandleError(httpContext, ex.Message, 400);
+        }
+        catch (UnauthorizedException ex)
+        {
+            var discordModel = GetDiscordModel(_message, 008000, titulo: "Acesso da rota!");
+            await NotificarDiscord(discordModel, discordHttpService);
+            await HandleError(httpContext, ex.Message, 401);
         }
         catch (Exception ex)
         {

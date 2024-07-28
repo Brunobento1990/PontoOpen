@@ -9,6 +9,7 @@ public static class DependencyInjectServices
     public static IServiceCollection InjectServices(this IServiceCollection services)
     {
         services.AddScoped<ILoginService, LoginService>();
+        services.AddScoped<IPontoService, PontoService>();
 
         return services;
     }

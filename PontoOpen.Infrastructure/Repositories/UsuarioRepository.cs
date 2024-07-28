@@ -5,28 +5,28 @@ using PontoOpen.Infrastructure.Context;
 
 namespace PontoOpen.Infrastructure.Repositories;
 
-public sealed class EmpresaRepository : IEmpresaRepository
+public sealed class UsuarioRepository : IUsuarioRepository
 {
     private readonly AppDbContext _appDbContext;
 
-    public EmpresaRepository(AppDbContext appDbContext)
+    public UsuarioRepository(AppDbContext appDbContext)
     {
         _appDbContext = appDbContext;
     }
 
-    public async Task<Empresa?> GetByChaveDeAcessoAsync(long chaveDeAcesso)
+    public async Task<Usuario?> GetByChaveDeAcessoAsync(long chaveDeAcesso)
     {
         return await _appDbContext
-            .Empresas
+            .Usuarios
             .AsNoTracking()
-            .Include(x => x.AcessoEmpresa)
-            .FirstOrDefaultAsync(x => x.AcessoEmpresa.ChaveDeAcesso == chaveDeAcesso);
+            .Include(x => x.AcessoUsuario)
+            .FirstOrDefaultAsync(x => x.AcessoUsuario.ChaveDeAcesso == chaveDeAcesso);
     }
 
-    public async Task<Empresa?> GetByIdAsync(Guid id)
+    public async Task<Usuario?> GetByIdAsync(Guid id)
     {
         return await _appDbContext
-            .Empresas
+            .Usuarios
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == id);
     }

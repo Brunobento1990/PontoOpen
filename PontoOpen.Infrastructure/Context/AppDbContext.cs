@@ -14,6 +14,7 @@ public class AppDbContext : DbContext
     public DbSet<Empresa> Empresas { get; set; }
     public DbSet<AcessoUsuario> AcessosUsuarios { get; set; }
     public DbSet<AcessoEmpresa> AcessosEmpresas { get; set; }
+    public DbSet<Ponto> Pontos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

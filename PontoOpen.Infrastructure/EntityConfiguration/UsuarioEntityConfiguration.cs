@@ -32,5 +32,10 @@ public class UsuarioEntityConfiguration : BaseEntityConfiguration<Usuario>
             .WithOne(x => x.Usuario)
             .HasForeignKey<AcessoUsuario>(x => x.UsuarioId)
             .OnDelete(DeleteBehavior.NoAction);
+
+        builder.HasMany(x => x.Pontos)
+            .WithOne(x => x.Usuario)
+            .HasForeignKey(x => x.UsuarioId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

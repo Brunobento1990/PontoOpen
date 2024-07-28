@@ -21,4 +21,19 @@ public abstract class ControllerApiBase<T> : ControllerBase
 
         return BadRequest(result.AsT1);
     }
+
+    protected IActionResult Result(T obj)
+    {
+        if (obj == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(obj);
+    }
+
+    protected IActionResult ResultList(IList<T> obj)
+    {
+        return Ok(obj);
+    }
 }

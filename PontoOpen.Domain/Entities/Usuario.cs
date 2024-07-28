@@ -24,4 +24,5 @@ public sealed class Usuario : BaseEntity
     public Guid EmpresaId { get; private set; }
     public Empresa Empresa { get; set; } = null!;
     public AcessoUsuario AcessoUsuario { get; set; } = null!;
+    public IList<Ponto> Pontos { get; set; } = [];
 }
