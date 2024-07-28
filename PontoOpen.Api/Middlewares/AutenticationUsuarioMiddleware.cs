@@ -28,6 +28,11 @@ public class AutenticationUsuarioMiddleware
             return;
         }
 
+        foreach (var item in httpContext.Request.Headers)
+        {
+            Console.WriteLine($"Headers: {item.Key}");
+        }
+
         var chaveDeAcessoEmpresa = (string?)httpContext
             .Request
             .Headers
