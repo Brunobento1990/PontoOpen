@@ -31,6 +31,7 @@ public sealed class PontoRepository : IPontoRepository
         return await _appDbContext
             .Pontos
             .AsNoTracking()
+            .OrderBy(x => x.Horario)
             .Where(x => x.CreatedAt.Date == ultimoPonto.Date && x.UsuarioId == usuarioId)
             .ToListAsync();
     }
