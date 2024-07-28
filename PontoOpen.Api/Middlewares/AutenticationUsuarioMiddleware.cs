@@ -28,21 +28,16 @@ public class AutenticationUsuarioMiddleware
             return;
         }
 
-        foreach (var item in httpContext.Request.Headers)
-        {
-            Console.WriteLine($"Headers: {item.Key}");
-        }
-
         var chaveDeAcessoEmpresa = (string?)httpContext
             .Request
             .Headers
-            .FirstOrDefault(x => x.Key == "ChaveDeAcessoEmpresa")
+            .FirstOrDefault(x => x.Key.ToLower() == "chavedeacessoempresa")
             .Value;
 
         var chaveDeAcessoUsuario = (string?)httpContext
             .Request
             .Headers
-            .FirstOrDefault(x => x.Key == "ChaveDeAcessoUsuario")
+            .FirstOrDefault(x => x.Key.ToLower() == "chavedeacessousuario")
             .Value;
 
         if (string.IsNullOrWhiteSpace(chaveDeAcessoEmpresa) || string.IsNullOrWhiteSpace(chaveDeAcessoUsuario) ||
