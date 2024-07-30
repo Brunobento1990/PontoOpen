@@ -7,11 +7,12 @@ namespace PontoOpen.Infrastructure.HttpService.Services;
 
 public sealed class GoogleHttpService : IGoogleHttpService
 {
-    private const string _url = "/json?language=pt-BR&latlng={0},{1}location_type=ROOFTOP&result_type={2}&key={3}";
+    private const string _url = "/maps/api/geocode/json?language=pt-BR&latlng={0},{1}&location_type=ROOFTOP&result_type={2}&key={3}";
     private const string _premise = "premise";
     private const string _street_address = "street_address";
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ConfiguracaoApiGoogle _configuracaoApiGoogle;
+    private const int TENTATIVAS = 3;
     private readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
         PropertyNameCaseInsensitive = true,
@@ -30,33 +31,37 @@ public sealed class GoogleHttpService : IGoogleHttpService
     public async Task<ResponseApiLocalizacaoGoogle> GetAddressByLocationAsync(string latitude, string longitude)
     {
         var client = _httpClientFactory.CreateClient("ApiGoogle");
-        var response = await client.GetAsync(string.Format(_url, latitude, longitude, _premise, _configuracaoApiGoogle.ApiKey));
-        var content = await response.Content.ReadAsStringAsync();
-
-        if (!response.IsSuccessStatusCode)
+        var url = string.Format(_url, latitude, longitude, _premise, _configuracaoApiGoogle.ApiKey);
+        int _tentativas = 0;
+        while (_tentativas < TENTATIVAS)
         {
-            Console.WriteLine(content);
-            throw new Exception("Erro na api do google.");
-        }
+            _tentativas++;
 
-        var result = JsonSerializer.Deserialize<ResponseApiLocalizacaoGoogle>(content, _jsonSerializerOptions)
-            ?? throw new Exception("Erro na desserelização do objeto de resposta da api do google!");
-
-        if (result.Status.ToUpper() == "ZERO_RESULTS")
-        {
-            response = await client.GetAsync(string.Format(_url, latitude, longitude, _street_address, _configuracaoApiGoogle.ApiKey));
-            content = await response.Content.ReadAsStringAsync();
+            var response = await client.GetAsync(url);
+            var content = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
             {
-                Console.WriteLine(content);
-                throw new Exception("Erro na api do google.");
+                if (_tentativas == TENTATIVAS)
+                {
+                    Console.WriteLine(content);
+                    throw new Exception(content ?? "Erro na consulta de licalização do google!");
+                }
+                continue;
             }
 
-            return JsonSerializer.Deserialize<ResponseApiLocalizacaoGoogle>(content, _jsonSerializerOptions)
-            ?? throw new Exception("Erro na desserelização do objeto de resposta da api do google!");
+            var result = JsonSerializer.Deserialize<ResponseApiLocalizacaoGoogle>(content, _jsonSerializerOptions)
+                ?? throw new Exception("Erro na desserelização do objeto de resposta da api do google!");
+
+            if (result.Status.ToUpper() == "ZERO_RESULTS")
+            {
+                url = string.Format(_url, latitude, longitude, _street_address, _configuracaoApiGoogle.ApiKey);
+                continue;
+            }
+
+            return result;
         }
 
-        return result;
+        throw new Exception("Erro desconhecido na consulta da api google!");
     }
 }

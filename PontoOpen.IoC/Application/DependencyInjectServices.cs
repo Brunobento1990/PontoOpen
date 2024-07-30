@@ -10,6 +10,7 @@ public static class DependencyInjectServices
     {
         services.AddScoped<ILoginService, LoginService>();
         services.AddScoped<IPontoService, PontoService>();
+        services.AddScoped<IGoogleApiService, GoogleApiService>();
 
         return services;
     }

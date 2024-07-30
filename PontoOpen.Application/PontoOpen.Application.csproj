@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PontoOpen.Domain\PontoOpen.Domain.csproj" />
+    <ProjectReference Include="..\PontoOpen.Infrastructure\PontoOpen.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
