@@ -7,6 +7,6 @@ public class LocalizacaoLatLogDto
 
     public bool Validar()
     {
-        return string.IsNullOrWhiteSpace(Latitude) || string.IsNullOrWhiteSpace(Longitude);
+        return !string.IsNullOrWhiteSpace(Latitude) || !string.IsNullOrWhiteSpace(Longitude);
     }
 }
