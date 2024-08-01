@@ -6,6 +6,7 @@ public class PontoViewModel : BaseViewModel
 {
     public TimeSpan Horario { get; set; }
     public Guid UsuarioId { get; set; }
+    public string Endereco { get; set; } = string.Empty;
     public UsuarioViewModel Usuario { get; set; } = null!;
 
     public static explicit operator PontoViewModel(Ponto ponto)
@@ -17,7 +18,8 @@ public class PontoViewModel : BaseViewModel
             Id = ponto.Id,
             UpdatedAt = ponto.UpdatedAt,
             Usuario = ponto.Usuario != null ? (UsuarioViewModel)ponto.Usuario : null!,
-            UsuarioId = ponto.UsuarioId
+            UsuarioId = ponto.UsuarioId,
+            Endereco = ponto.Endereco
         };
     }
 }

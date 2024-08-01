@@ -12,5 +12,8 @@ public class PontoEntityConfiguration : BaseEntityConfiguration<Ponto>
         builder.HasIndex(x => x.CreatedAt);
         builder.Property(x => x.Horario)
             .IsRequired();
+        builder.Property(x => x.Endereco)
+            .HasMaxLength(500)
+            .IsRequired();
     }
 }

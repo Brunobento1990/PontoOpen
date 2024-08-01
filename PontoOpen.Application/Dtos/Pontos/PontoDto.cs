@@ -5,6 +5,7 @@ namespace PontoOpen.Application.Dtos.Pontos;
 public class PontoDto
 {
     public TimeSpan Horario { get; set; }
+    public string Endereco { get; set; } = string.Empty;
 
     public Ponto ToEntity(Guid usuarioId)
     {
@@ -13,6 +14,7 @@ public class PontoDto
             createdAt: DateTime.Now,
             updatedAt: null,
             horario: Horario,
-            usuarioId: usuarioId);
+            usuarioId: usuarioId,
+            endereco: Endereco);
     }
 }
